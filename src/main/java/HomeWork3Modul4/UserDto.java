@@ -1,7 +1,6 @@
 package HomeWork3Modul4;
 
 import lombok.*;
-
 import java.util.Date;
 import java.util.List;
 
@@ -9,10 +8,16 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 public class UserDto {
+
     private Integer id;
+
     private String name;
+
     private String password;
-    private Date created_at;
+
+    private Date createdAt;
+
     private List<Post> post;
+
     private List<Comment> comment;
 }

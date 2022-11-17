@@ -1,7 +1,6 @@
 package HomeWork3Modul4;
 
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -13,15 +12,18 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class Post {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column( nullable = false)
+
+    @Column (nullable = false)
     @NonNull
     private String text;
+
     @Column
-    private Date created_at = new Date();
+    private Date createdAt = new Date();
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", nullable = false)

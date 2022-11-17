@@ -12,18 +12,22 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class User {
+
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     @Column(unique = true, nullable = false)
     @NonNull
     private String name;
+
     @Column(nullable = false)
     @NonNull
     private String password;
+
     @Column
-    private Date  created_at = new Date();
+    private Date  createdAt = new Date();
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
     @ToString.Exclude
@@ -34,5 +38,4 @@ public class User {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private List<Comment> comment;
-
 }

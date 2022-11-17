@@ -4,17 +4,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-
 import java.io.Closeable;
 import java.io.Serializable;
 
 @Slf4j
 public class InstDao implements Closeable {
     private final Session session;
+
     public InstDao() {
        SessionFactory sessionFactory = HibernateConfig.createSessionFactory();
        session = sessionFactory.openSession();
     }
+
     public Integer addNewUser(User user) {
         session.beginTransaction();
         session.save(user);
@@ -22,6 +23,7 @@ public class InstDao implements Closeable {
         session.clear();
         return user.getId();
     }
+
     public Integer addNewPost(Post post) {
         session.beginTransaction();
         session.save(post);
@@ -29,6 +31,7 @@ public class InstDao implements Closeable {
         session.clear();
         return post.getId();
     }
+
     public Integer addNewComment(Comment comment) {
         session.beginTransaction();
         session.save(comment);
@@ -36,6 +39,7 @@ public class InstDao implements Closeable {
         session.clear();
         return comment.getId();
     }
+
     public UserDto getUser(Serializable idUser) {
         session.beginTransaction();
         User user = session.load(User.class, idUser);
@@ -45,7 +49,7 @@ public class InstDao implements Closeable {
                 .id(user.getId())
                 .name(user.getName())
                 .password(user.getPassword())
-                .created_at(user.getCreated_at())
+                .createdAt(user.getCreatedAt())
                 .post(user.getPost())
                 .comment(user.getComment())
                 .build();
@@ -53,6 +57,7 @@ public class InstDao implements Closeable {
         session.clear();
         return userDto;
     }
+
     public PostDto getPost(Serializable idPost) {
         session.beginTransaction();
         Post post = session.get(Post.class, idPost);
@@ -61,7 +66,7 @@ public class InstDao implements Closeable {
         PostDto postDto = PostDto.builder()
                 .id(post.getId())
                 .text(post.getText())
-                .created_at(post.getCreated_at())
+                .createdAt(post.getCreatedAt())
                 .user(post.getUser())
                 .comment(post.getComment())
                 .build();
@@ -69,6 +74,7 @@ public class InstDao implements Closeable {
         session.clear();
         return postDto;
     }
+
     public CommentDto getComment(Serializable idComment) {
         session.beginTransaction();
         Comment comment = session.get(Comment.class, idComment);
@@ -77,7 +83,7 @@ public class InstDao implements Closeable {
         CommentDto commentDto = CommentDto.builder()
                 .id(comment.getId())
                 .text(comment.getText())
-                .created_at(comment.getCreated_at())
+                .createdAt(comment.getCreatedAt())
                 .post(comment.getPost())
                 .user(comment.getUser())
                 .build();
@@ -85,6 +91,7 @@ public class InstDao implements Closeable {
         session.clear();
         return commentDto;
     }
+
     @Override
     public void close() {
             if (session != null) {
@@ -96,6 +103,3 @@ public class InstDao implements Closeable {
             }
     }
 }
-
-
-

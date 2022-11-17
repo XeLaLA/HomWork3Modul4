@@ -2,13 +2,12 @@ package HomeWork3Modul4;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
 @Slf4j
 public class Runner {
     public static void main(String[] args) {
+
         InstDao instDao= new InstDao();
-        User newUser = new User("Petr","1234");
+        User newUser = new User("Ask","1234");
         Post newPost = new Post("Text", newUser);
         Comment newComment = new Comment("Text", newPost, newUser);
         instDao.addNewUser(newUser);
@@ -17,7 +16,6 @@ public class Runner {
         log.info(newPost.toString());
         instDao.addNewComment(newComment);
         log.info(newComment.toString());
-
         UserDto user = instDao.getUser(1);
         log.info(user.toString());
         PostDto post = instDao.getPost(1);
